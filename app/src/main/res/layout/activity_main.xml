@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/rsvpWordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/configLayout"
+        layout="@layout/config_view" />
+
+    <include
+        android:id="@+id/splitScreenPrompt"
+        layout="@layout/split_screen_prompt"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RSVP Reader</string>
+    <string name="accessibility_service_description">Captures text from other apps for RSVP reading</string>
+    <string name="enable_split_screen">Enable Split Screen Mode</string>
+    <string name="split_screen_instructions">Please enable split-screen mode:\n1. Open Recent Apps\n2. Tap app icon at top\n3. Select \"Split Screen\"</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="rsvp_mode">RSVP Mode: %s</string>
+    <string name="naive">Naive</string>
+    <string name="orp">ORP</string>
+    <string name="min_wps">Min WPS: %d</string>
+    <string name="max_wps">Max WPS: %d</string>
+    <string name="current_speed">Speed: %d WPS</string>
+    <string name="enable_accessibility">Enable Accessibility Service</string>
+    <string name="enable_overlay">Enable Overlay Permission</string>
+    <string name="permissions_required">Required permissions not granted</string>
+    <string name="overlay_notification_title">RSVP Reader Active</string>
+    <string name="overlay_notification_text">Overlay controls active</string>
+    <string name="notification_channel_name">Overlay Service</string>
+    <string name="notification_channel_desc">Required for overlay controls</string>
+</resources>
