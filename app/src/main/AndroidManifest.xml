@@ -20,7 +20,8 @@
             android:exported="true"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
-            android:supportsPictureInPicture="false">
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
