@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,13 +13,15 @@
         android:text="@string/enable_split_screen"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp" 
+        android:textColor="@color/white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/split_screen_instructions"
         android:textSize="16sp"
-        android:gravity="center" />
+        android:gravity="center" 
+        android:textColor="@color/white" />
 
 </LinearLayout>

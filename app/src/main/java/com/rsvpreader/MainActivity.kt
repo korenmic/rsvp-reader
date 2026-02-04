@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPause: Button
     private lateinit var btnStop: Button
     private lateinit var btnToggleMode: Button
+    private lateinit var btnEnableOverlay: Button
+    private lateinit var btnEnableAccessibility: Button
 
     private var minWps = 3
     private var maxWps = 45
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setupListeners()
         checkPermissions()
         checkSplitScreenMode()
+        updatePermissionUI()
         observeRSVPEngine()
     }
 
@@ -54,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         btnPause = findViewById(R.id.btnPause)
         btnStop = findViewById(R.id.btnStop)
         btnToggleMode = findViewById(R.id.btnToggleMode)
+        btnEnableOverlay = findViewById(R.id.btnEnableOverlay)
+        btnEnableAccessibility = findViewById(R.id.btnEnableAccessibility)
 
         updateUI()
     }
@@ -107,6 +112,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        btnEnableOverlay.setOnClickListener {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+            startActivity(intent)
+        }
+
+        btnEnableAccessibility.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
+
         findViewById<Button>(R.id.btnIncreaseMax).setOnClickListener {
             if (maxWps < 100) {
                 maxWps++
@@ -118,17 +136,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkPermissions() {
-        if (!Settings.canDrawOverlays(this)) {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")
-            )
-            startActivity(intent)
-        }
+        // Do not auto-redirect users into system Settings.
+        // Instead, show explicit buttons in our UI.
+        updatePermissionUI()
+    }
 
-        if (!isAccessibilityServiceEnabled()) {
-            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
+    private fun updatePermissionUI() {
+        val overlayOk = Settings.canDrawOverlays(this)
+        val accOk = isAccessibilityServiceEnabled()
+
+        btnEnableOverlay.visibility = if (overlayOk) View.GONE else View.VISIBLE
+        btnEnableAccessibility.visibility = if (accOk) View.GONE else View.VISIBLE
+
+        if (!overlayOk || !accOk) {
+            statusText.text = getString(R.string.permissions_required)
+            btnPlay.isEnabled = false
+            btnPause.isEnabled = false
+            btnStop.isEnabled = false
+        } else {
+            updatePlaybackButtons()
         }
     }
 
@@ -154,6 +180,7 @@ class MainActivity : AppCompatActivity() {
     override fun onMultiWindowModeChanged(isInMultiWindowMode: Boolean) {
         super.onMultiWindowModeChanged(isInMultiWindowMode)
         checkSplitScreenMode()
+        updatePermissionUI()
     }
 
     private fun startOverlayService() {
@@ -235,6 +262,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         checkSplitScreenMode()
+        updatePermissionUI()
     }
 
     override fun onDestroy() {

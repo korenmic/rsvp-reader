@@ -12,5 +12,5 @@
     <color name="light_gray">#FFBDBDBD</color>
     <color name="overlay_bg">#CC000000</color>
     <color name="paused_gray">#80808080</color>
-    <color name="config_bg_transparent">#E6FFFFFF</color>
+    <color name="config_bg_transparent">#CC000000</color>
 </resources>
